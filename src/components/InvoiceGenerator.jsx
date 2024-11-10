@@ -128,26 +128,15 @@ const Invoice = ({ data }) => {
       doc.text(`G.C.N./R.R.NO: ${data.gcn}`, pageWidth / 2, 49);
       doc.text(`Place of Supply: ${data.placeOfSupply.toUpperCase()}`, pageWidth / 2, 54);
 
-     // Add receiver details (left side)
-    doc.line(margin, 57, pageWidth - margin, 57);
-    doc.text('DETAILS OF RECEIVER [BILLED TO PARTY]', margin, 62);
-    doc.line(margin, 65, pageWidth / 2 - 5, 65);
-    doc.text(`NAME: ${data.receiverName.toUpperCase()}`, margin, 70);
-    doc.text(`ADDRESS: ${data.receiverAddress.toUpperCase()}`, margin, 75);
-    doc.text(`GST IN: ${data.receiverGST}`, margin, 80);
-    doc.text(`STATE: ${data.receiverState.toUpperCase()}`, margin, 85);
-    doc.text(`CODE: ${data.receiverCode}`, margin + 65, 85);
-
-    // Add consignee details
-    doc.text('DETAILS OF CONSIGNEE [SHIPPED TO PARTY]', pageWidth / 2, 62);
-    doc.line(pageWidth / 2, 65, pageWidth - margin, 65);
-    doc.text(`NAME: ${data.consigneeName.toUpperCase()}`, pageWidth / 2, 70);
-    doc.text(`ADDRESS: ${data.consigneeAddress.toUpperCase()}`, pageWidth / 2, 75);
-    doc.text(`GST IN: ${data.consigneeGST}`, pageWidth / 2, 80);
-    doc.text(`STATE: ${data.consigneeState.toUpperCase()}`, pageWidth / 2, 85);
-    doc.text(`CODE: ${data.consigneeCode}`, pageWidth / 2 + 65, 85);
-
-
+      // Add receiver details
+      doc.line(margin, 57, pageWidth - margin, 57);
+      doc.text('DETAILS OF RECEIVER [BILLED TO PARTY]', pageWidth / 2, 62, { align: 'center' });
+      doc.line(margin, 65, pageWidth - margin, 65);
+      doc.text(`NAME: ${data.receiverName.toUpperCase()}`, margin, 70);
+      doc.text(`ADDRESS: ${data.receiverAddress.toUpperCase()}`, margin, 75);
+      doc.text(`GST IN: ${data.receiverGST}`, margin, 80);
+      doc.text(`STATE: ${data.receiverState.toUpperCase()}`, margin, 85);
+      doc.text(`CODE: ${data.receiverCode}`, margin + 65, 85);
       
       // Add table
       const tableColumn = ['S.NO', 'DESCRIPTION OF GOODS', 'HSN CODE', 'QNTY', 'RATE', 'AMOUNT (Rs)', 'PAISE'];
