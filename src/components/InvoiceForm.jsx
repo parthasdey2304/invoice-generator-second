@@ -32,7 +32,7 @@ const InvoiceForm = ({ onSubmit }) => {
       roundedOff: '0',
     },
     numberOfBags: '',
-    pdfLink: 'https://drive.google.com/file/d/1eUYyZqZBuYCdWR5T1sz25yTQgkXq_Pcl/view?usp=sharing'
+    pdfLink: 'https://drive.google.com/file/d/1UqVo8Il0_z6u43Dq-a-VDRgJmwfIo6cu/view?usp=sharing'
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -227,70 +227,6 @@ const InvoiceForm = ({ onSubmit }) => {
             />
           </div>
         </div>
-
-        <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Consignee Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Name</label>
-          <input
-            type="text"
-            name="consigneeName"
-            value={formData.consigneeName}
-            onChange={(e) => handleInputChange(e)}
-            className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
-              isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
-            }`}
-          />
-        </div>
-        <div>
-          <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Address</label>
-          <input
-            type="text"
-            name="consigneeAddress"
-            value={formData.consigneeAddress}
-            onChange={(e) => handleInputChange(e)}
-            className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
-              isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
-            }`}
-          />
-        </div>
-        <div>
-          <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>GST IN</label>
-          <input
-            type="text"
-            name="consigneeGST"
-            value={formData.consigneeGST}
-            onChange={(e) => handleInputChange(e)}
-            className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
-              isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
-            }`}
-          />
-        </div>
-        <div>
-          <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>State</label>
-          <input
-            type="text"
-            name="consigneeState"
-            value={formData.consigneeState}
-            onChange={(e) => handleInputChange(e)}
-            className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
-              isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
-            }`}
-          />
-        </div>
-        <div>
-          <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Code</label>
-          <input
-            type="text"
-            name="consigneeCode"
-            value={formData.consigneeCode}
-            onChange={(e) => handleInputChange(e)}
-            className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
-              isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
-            }`}
-          />
-        </div>
-      </div>
 
 
         <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Items</h3>

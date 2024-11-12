@@ -113,11 +113,13 @@ const Invoice = ({ data }) => {
       doc.setFontSize(13);
       doc.text('TAX INVOICE', pageWidth / 2, 12, { align: 'center' });
       doc.setFontSize(11);
-      doc.text('Mfg. of M.S. Box, Moduler Box, M.S. Container Box & General Order Supply', pageWidth / 2, 27, { align: 'center' });
-      doc.text('31/A PULIN KHATICK ROAD KOLKATA – 700015', pageWidth / 2, 31, { align: 'center' });
+      // doc.text('Mfg. of M.S. Box, Moduler Box, M.S. Container Box & General Order Supply', pageWidth / 2, 27, { align: 'center' });
+      doc.text('MFG. OF M.S. BOX, MODULER BOX, M.S. CONTAINER BOX & GENERAL ORDER SUPPLY', pageWidth / 2, 27, { align: 'center' });
+      // doc.text('31/A PULIN KHATICK ROAD KOLKATA – 700015', pageWidth / 2, 31, { align: 'center' });
+      doc.text('25/c RADHANATH CHOWDHURY ROAD KOLKATA -700015', pageWidth / 2, 31, { align: 'center' });
       doc.text(`GST IN 19AZBPS9911N1ZL`, margin, 37);
       // doc.text('EMAIL: ashokkumarshaw1103@gmail.com', pageWidth / 2 - 30, 37);
-      doc.text(`MOBILE- 8820416613`, pageWidth - margin, 37, { align: 'right' });
+      doc.text(`MOBILE- 9331271486`, pageWidth - margin, 37, { align: 'right' });
 
       // Add invoice details
       doc.line(margin, 39, pageWidth - margin, 39);
