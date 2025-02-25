@@ -94,7 +94,7 @@ const InvoiceForm = ({ onSubmit }) => {
       </div>
 
       <h1 className={`text-center text-5xl font-bold pt-16 py-10 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
-        ALOK ENGINEERING CO.
+        ALISHA ENTERPRISE
       </h1>
 
       <form onSubmit={handleSubmit} className={`p-6 mx-auto max-w-4xl ${

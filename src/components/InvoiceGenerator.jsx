@@ -77,10 +77,7 @@ const Invoice = ({ data }) => {
 
     const copyLabels = [
       "Orignial Buyer's copy",
-      "Orignial Buyer's copy",
-      "Orignial Buyer's copy",
       "Orignial Seller's copy",
-      "Orignial Transport's copy",
     ];
 
     copyLabels.forEach((label, index) => {
@@ -111,7 +108,7 @@ const Invoice = ({ data }) => {
 
       // Add title and basic information
       doc.setFontSize(19);
-      doc.text('ALOK ENGINEERING CO.', pageWidth / 2, 21, { align: 'center' });
+      doc.text('ALISHA ENTERPRISE', pageWidth / 2, 21, { align: 'center' });
       doc.setFontSize(13);
       doc.text('TAX INVOICE', pageWidth / 2, 12, { align: 'center' });
       doc.setFontSize(11);
