@@ -37,7 +37,7 @@ const InvoiceForm = ({ onSubmit }) => {
       roundedOff: '0',
     },
     numberOfBags: '',
-    pdfLink: ''
+    pdfLink: 'https://drive.google.com/file/d/1VZWoSsItG3g1o_g7gqIWEhHaG6mY6OTV/view?usp=sharing'
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -515,11 +515,11 @@ const InvoiceForm = ({ onSubmit }) => {
               type="text"
               name="bankName"
               value={formData.bankDetails.bankName}
-              readOnly
+              onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
-                isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
-              }`}
-            />
+                  isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
+                }`}
+                />
           </div>
           <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Branch</label>
@@ -527,11 +527,11 @@ const InvoiceForm = ({ onSubmit }) => {
               type="text"
               name="branch"
               value={formData.bankDetails.branch}
-              readOnly
+              onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
-                isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
-              }`}
-            />
+                  isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
+                }`}
+                />
           </div>
           <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Account No</label>
@@ -539,11 +539,11 @@ const InvoiceForm = ({ onSubmit }) => {
               type="text"
               name="accountNo"
               value={formData.bankDetails.accountNo}
-              readOnly
+              onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
-                isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
-              }`}
-            />
+                  isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
+                }`}
+                />
           </div>
           <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>IFSC Code</label>
@@ -551,7 +551,7 @@ const InvoiceForm = ({ onSubmit }) => {
               type="text"
               name="ifscCode"
               value={formData.bankDetails.ifscCode}
-              readOnly
+              onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
                 isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
               }`}

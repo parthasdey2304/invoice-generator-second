@@ -75,9 +75,11 @@ const Invoice = ({ data }) => {
     const margin = 10;
 
     const copyLabels = [
-      "Orignial Buyer's copy",
-      "Orignial Seller's copy",
-    ];
+        "Orignial Buyer's copy",
+        "Orignial Buyer's copy",
+        "Orignial Seller's copy",
+        "Orignial Transport's copy",
+      ];
 
     copyLabels.forEach((label, index) => {
       if (index > 0) doc.addPage();
@@ -87,11 +89,13 @@ const Invoice = ({ data }) => {
       doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
       // Set stroke color to light blue, yellow and pink respectively for the different copies
-      if(index == 0) {
-          doc.setDrawColor(2, 176, 252);
-        } else {
-            doc.setDrawColor(255, 180, 75);
-        } 
+      if(index == 2) {
+        doc.setDrawColor(255, 180, 75);
+      } else if(index == 3) {
+        doc.setDrawColor(238, 130, 238);
+      } else {
+        doc.setDrawColor(2, 176, 252);
+      }
 
       // Add copy label
       doc.setFontSize(11);
@@ -153,12 +157,15 @@ const Invoice = ({ data }) => {
       
       // Set table line color based on the copy type
       let tableLineColor;
-      if (index == 0) {
+      if (index < 2) {
         // Light blue color for the Buyer's copy
         tableLineColor = [2, 176, 252];
-      } else {
+      } else if (index === 2) {
         // Lighter yellow for Seller's copy
         tableLineColor = [255, 180, 75];
+      } else {
+        // Lighter pink for Transport's copy
+        tableLineColor = [238, 130, 238];
       }
       
       doc.autoTable({

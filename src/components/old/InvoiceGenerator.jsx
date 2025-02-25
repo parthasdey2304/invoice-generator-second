@@ -77,7 +77,10 @@ const Invoice = ({ data }) => {
 
     const copyLabels = [
       "Orignial Buyer's copy",
+      "Orignial Buyer's copy",
+      "Orignial Buyer's copy",
       "Orignial Seller's copy",
+      "Orignial Transport's copy",
     ];
 
     copyLabels.forEach((label, index) => {
