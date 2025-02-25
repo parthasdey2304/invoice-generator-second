@@ -209,6 +209,7 @@ const Invoice = ({ data }) => {
       if(data.igst == null) {
         data.igst = 0;
       }
+      
       let totalAmountBeforeTax = data.items.reduce((sum, item) => sum + (item.quantity * item.rate), 0).toFixed(2);
       let cgst = (totalAmountBeforeTax * (parseFloat(data.cgst) || 0) * 0.01).toFixed(2);
       let sgst = (totalAmountBeforeTax * (parseFloat(data.sgst) || 0) * 0.01).toFixed(2);

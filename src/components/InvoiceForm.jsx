@@ -514,7 +514,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="text"
               name="bankName"
-              value={formData.bankDetails.bankName}
+              value={formData.bankName}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
                   isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -526,7 +526,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="text"
               name="branch"
-              value={formData.bankDetails.branch}
+              value={formData.branch}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
                   isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -538,7 +538,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="text"
               name="accountNo"
-              value={formData.bankDetails.accountNo}
+              value={formData.accountNo}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
                   isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -550,7 +550,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="text"
               name="ifscCode"
-              value={formData.bankDetails.ifscCode}
+              value={formData.ifscCode}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md ${
                 isDarkTheme ? 'bg-gray-600 text-gray-300 border-gray-700' : 'bg-gray-100 text-gray-700 border-gray-300'
@@ -558,7 +558,6 @@ const InvoiceForm = ({ onSubmit }) => {
             />
           </div>
         </div>
-
         <div className="mt-8">
           <button
             type="submit"
