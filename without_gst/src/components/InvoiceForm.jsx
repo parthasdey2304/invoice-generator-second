@@ -146,11 +146,11 @@ const InvoiceForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/invoice', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      // const response = await axios.post('http://localhost:5000/api/invoice', formData, {
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
       
       console.log('Invoice created successfully:', response.data);
       onSubmit(formData);
@@ -180,7 +180,7 @@ const InvoiceForm = ({ onSubmit }) => {
       </div>
 
       <h1 className={`text-center text-5xl font-bold pt-16 py-10 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>
-        ALISHA ENTERPRISE (Non GST)
+        ANMOL ENTERPRISE (Non GST)
       </h1>
 
       <form onSubmit={handleSubmit} className={`p-6 mx-auto max-w-4xl ${
@@ -212,7 +212,7 @@ const InvoiceForm = ({ onSubmit }) => {
               }`}
             />
           </div>
-          <div>
+          {/* <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Transport Name</label>
             <input
               type="text"
@@ -247,7 +247,7 @@ const InvoiceForm = ({ onSubmit }) => {
                 isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
               }`}
             />
-          </div>
+          </div> */}
         </div>
 
         <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Receiver Details</h3>
@@ -276,7 +276,7 @@ const InvoiceForm = ({ onSubmit }) => {
               }`}
             />
           </div>
-          <div>
+          {/* <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>GST IN</label>
             <input
               type="text"
@@ -311,7 +311,7 @@ const InvoiceForm = ({ onSubmit }) => {
                 isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
               }`}
             />
-          </div>
+          </div> */}
           <div>
             <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Mobile Number</label>
             <input
@@ -365,7 +365,7 @@ const InvoiceForm = ({ onSubmit }) => {
                 ))}
               </datalist>
             </div> */}
-            <div>
+            {/* <div>
               <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>HSN code</label>
               <input
                 type="text"
@@ -376,7 +376,7 @@ const InvoiceForm = ({ onSubmit }) => {
                   isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
                 }`}
               />
-            </div>
+            </div> */}
             <div>
               <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Quantity</label>
               <input
@@ -417,7 +417,7 @@ const InvoiceForm = ({ onSubmit }) => {
           </div>
         ))}
 
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Number of Bags</label>
           <input
             type="number"
@@ -428,7 +428,7 @@ const InvoiceForm = ({ onSubmit }) => {
               isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
             }`}
           />
-        </div>
+        </div> */}
         {/*
         <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Tax Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
