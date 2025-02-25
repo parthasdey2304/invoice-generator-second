@@ -42,7 +42,7 @@ const Invoice = ({ data }) => {
 
         // Add Copy Labels
         doc.setFontSize(10);
-        doc.setFont('helvetica');
+        doc.setFont('cambria');
         doc.text(copyLabels[currentIndex], xOffset + halfWidth - 5, 10, { align: 'right' });
 
         // Add Title
