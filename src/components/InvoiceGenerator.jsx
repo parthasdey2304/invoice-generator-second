@@ -82,23 +82,16 @@ const Invoice = ({ data }) => {
     copyLabels.forEach((label, index) => {
       if (index > 0) doc.addPage();
     
-      // Set background color based on the copy type
-      if (index < 3) {
-        // White color for the Buyer's copy
-        doc.setFillColor(255, 255, 255);
-      } else if (index === 3) {
-        // Lighter yellow for Seller's copy
-        doc.setFillColor(255, 253, 230);
-      } else {
-        // Lighter pink for Transport's copy
-        doc.setFillColor(255, 230, 240);
-      }
-
-      // Add background rectangle
+      // Set background color to white for all copies
+      doc.setFillColor(255, 255, 255);
       doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
-      // Set stroke color to light blue
-      doc.setDrawColor(2, 176, 252);
+      // Set stroke color to light blue, yellow and pink respectively for the different copies
+      if(index == 0) {
+          doc.setDrawColor(2, 176, 252);
+        } else {
+            doc.setDrawColor(255, 180, 75);
+        } 
 
       // Add copy label
       doc.setFontSize(11);
@@ -107,15 +100,16 @@ const Invoice = ({ data }) => {
 
       // Add title and basic information
       doc.setFontSize(19);
-      doc.text('M/S RAM DHANI SHAW', pageWidth / 2, 21, { align: 'center' });
+      doc.text('ALISHA ENTERPRISE', pageWidth / 2, 21, { align: 'center' });
       doc.setFontSize(13);
       doc.text('TAX INVOICE', pageWidth / 2, 12, { align: 'center' });
       doc.setFontSize(11);
-      doc.text('PROPRIETOR: ASHOK KUMAR SHAW', pageWidth / 2, 27, { align: 'center' });
+      doc.text('PROPRIETOR: PUSHPA SHAW', pageWidth / 2, 27, { align: 'center' });
       doc.text('25/c RADHANATH CHOWDHURY ROAD KOLKATA -700015', pageWidth / 2, 31, { align: 'center' });
       doc.text(`GST IN 19AKWPS4940B1ZO`, margin, 37);
-      doc.text('EMAIL: ashokkumarshaw1103@gmail.com', pageWidth / 2 - 30, 37);
-      doc.text(`MOBILE- 8820416613`, pageWidth - margin, 37, { align: 'right' });
+      doc.text('EMAIL: alokshaw9318@gmail.com', pageWidth / 2 - 30, 37);
+      doc.text(`MOBILE- 9331271486`, pageWidth - margin, 31, { align: 'right' });
+      doc.text(`9903860494`, pageWidth - margin, 37, { align: 'right' });
 
       // Add invoice details
       doc.line(margin, 39, pageWidth - margin, 39);
@@ -134,7 +128,8 @@ const Invoice = ({ data }) => {
       doc.text(`ADDRESS: ${data.receiverAddress.toUpperCase()}`, margin, 75);
       doc.text(`GST IN: ${data.receiverGST}`, margin, 80);
       doc.text(`STATE: ${data.receiverState.toUpperCase()}`, margin, 85);
-      doc.text(`CODE: ${data.receiverCode}`, margin + 65, 85);
+      doc.text(`CODE: ${data.receiverCode}`, margin + 55, 85);
+      doc.text(`MOBILE NUMBER: ${data.receiverMobileNumber}`, margin + 85, 85);
       
       // Add table
       const tableColumn = ['S.NO', 'DESCRIPTION OF GOODS', 'HSN CODE', 'QNTY', 'RATE', 'AMOUNT (Rs)', 'PAISE'];
@@ -156,6 +151,16 @@ const Invoice = ({ data }) => {
         tableRows.push(['', '', '', '', '', '', '']);
       }
       
+      // Set table line color based on the copy type
+      let tableLineColor;
+      if (index == 0) {
+        // Light blue color for the Buyer's copy
+        tableLineColor = [2, 176, 252];
+      } else {
+        // Lighter yellow for Seller's copy
+        tableLineColor = [255, 180, 75];
+      }
+      
       doc.autoTable({
         head: [tableColumn],
         body: tableRows,
@@ -165,11 +170,11 @@ const Invoice = ({ data }) => {
           fontSize: 10, 
           cellPadding: 1, 
           halign: 'center', 
-          lineColor: [2, 176, 252],
-          fillColor: index === 3 ? [255, 253, 230] : (index === 4 ? [255, 230, 240] : null)
+          lineColor: tableLineColor,
+          fillColor: [255, 255, 255]
         },
         headStyles: { 
-          fillColor: [173, 216, 230], 
+          fillColor: tableLineColor, 
           textColor: 20, 
           halign: "center" 
         },
@@ -202,7 +207,8 @@ const Invoice = ({ data }) => {
       let sgst = (totalAmountBeforeTax * (parseFloat(data.sgst) || 0) * 0.01).toFixed(2);
       let igst = (totalAmountBeforeTax * (parseFloat(data.igst) || 0) * 0.01).toFixed(2);
       let otherCharges = parseFloat(data.otherCharges) || 0;
-      let totalAmountAfterTax = (parseFloat(totalAmountBeforeTax) + parseFloat(cgst) + parseFloat(sgst) + parseFloat(igst) + otherCharges).toFixed(2);
+      let lessDiscount = Math.abs(parseFloat(data.lessDiscount) || 0);
+      let totalAmountAfterTax = (parseFloat(totalAmountBeforeTax) + parseFloat(cgst) + parseFloat(sgst) + parseFloat(igst) + otherCharges - lessDiscount).toFixed(2);
       let totalAmountAfterRoundingOff = (parseFloat(roundOffValue(parseFloat(totalAmountAfterTax) || 0))).toFixed(2);
       let roundedOff =(totalAmountAfterRoundingOff - totalAmountAfterTax);
 
@@ -251,10 +257,20 @@ const Invoice = ({ data }) => {
       doc.text(`${igst.split('.')[0]}`, pageWidth - margin - 20, finalY + 20, { align: 'right' });
       doc.text(`${igst.split('.')[1]}`, pageWidth - margin - 5, finalY + 20, { align: 'right' });
 
-      doc.text(`ADD – Other Charges: `, pageWidth / 2 + 10, finalY + 25, { align: 'left' });
-      doc.text(`${otherCharges.toFixed(2).split('.')[0]}`, pageWidth - margin - 20, finalY + 25, { align: 'right' });
-      doc.text(`${otherCharges.toFixed(2).split('.')[1]}`, pageWidth - margin - 5, finalY + 25, { align: 'right' });
-
+      if(otherCharges != 0) {
+        doc.text(`ADD – Other Charges: `, pageWidth / 2 + 10, finalY + 25, { align: 'left' });
+        doc.text(`${otherCharges.toFixed(2).split('.')[0]}`, pageWidth - margin - 20, finalY + 25, { align: 'right' });
+        doc.text(`${otherCharges.toFixed(2).split('.')[1]}`, pageWidth - margin - 5, finalY + 25, { align: 'right' });
+      } else if(otherCharges == 0 && lessDiscount == 0) {
+        doc.text(`ADD – Other Charges: `, pageWidth / 2 + 10, finalY + 25, { align: 'left' });
+        doc.text(`${otherCharges.toFixed(2).split('.')[0]}`, pageWidth - margin - 20, finalY + 25, { align: 'right' });
+        doc.text(`${otherCharges.toFixed(2).split('.')[1]}`, pageWidth - margin - 5, finalY + 25, { align: 'right' });
+      }
+      else {
+        doc.text(`LESS DISCOUNT: `, pageWidth / 2 + 10, finalY + 25, { align: 'left' });
+        doc.text(`-${lessDiscount.toFixed(2).split('.')[0]}`, pageWidth - margin - 20, finalY + 25, { align: 'right' });
+        doc.text(`${lessDiscount.toFixed(2).split('.')[1]}`, pageWidth - margin - 5, finalY + 25, { align: 'right' });
+      }
       doc.text(`ROUNDED OFF: `, pageWidth / 2 + 10, finalY + 30, { align: 'left' });
       doc.text(`${roundedOff.toFixed(2).split('.')[0]}`, pageWidth - margin - 20, finalY + 30, { align: 'right' });
       doc.text(`${roundedOff.toFixed(2).split('.')[1]}`, pageWidth - margin - 5, finalY + 30, { align: 'right' });

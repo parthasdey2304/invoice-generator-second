@@ -21,22 +21,23 @@ const InvoiceForm = ({ onSubmit }) => {
     receiverGST: '',
     receiverState: '',
     receiverCode: '',
-    items: [{ description: '', hsnCode: '853810', quantity: '', rate: '' }],
+    receiverMobileNumber: '',
+    items: [{ description: '', hsnCode: '', quantity: '', rate: '' }],
     bankDetails: {
-      bankName: 'CANARA BANK',
-      branch: 'DHARMATALA',
-      accountNo: '127000140902',
-      ifscCode: 'CNRB0019592',
+      bankName: '',
+      branch: '',
+      accountNo: '',
+      ifscCode: '',
     },
     taxDetails: {
-      cgst: '0',
-      sgst: '0',
+      cgst: '9',
+      sgst: '9',
       igst: '0',
       otherCharges: '0',
       roundedOff: '0',
     },
     numberOfBags: '',
-    pdfLink: 'https://drive.google.com/file/d/1eUYyZqZBuYCdWR5T1sz25yTQgkXq_Pcl/view?usp=sharing'
+    pdfLink: ''
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -68,6 +69,11 @@ const InvoiceForm = ({ onSubmit }) => {
     "BIOVA WATER 1L",
     "BIOVA WATER 2L",
     "BIOVA WATER 5L",
+    "AQURA WATER 200ML",
+    "AQURA WATER 500ML",
+    "AQURA WATER 1L",
+    "AQURA WATER 2L",
+    "AQURA WATER 5L"
     // "2 MODULAR CONCEALED MS BOXES",
     // "3 MODULAR CONCEALED MS BOXES",
     // "4 MODULAR CONCEALED MS BOXES",
@@ -133,7 +139,7 @@ const InvoiceForm = ({ onSubmit }) => {
   const handleAddItem = () => {
     setFormData({
       ...formData,
-      items: [...formData.items, { description: '', hsnCode: '853810', quantity: '', rate: '' }],
+      items: [...formData.items, { description: '', hsnCode: '', quantity: '', rate: '' }],
     });
   };
 
@@ -306,6 +312,18 @@ const InvoiceForm = ({ onSubmit }) => {
               }`}
             />
           </div>
+          <div>
+            <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Mobile Number</label>
+            <input
+              type="text"
+              name="receiverMobileNumber"
+              value={formData.receiverMobileNumber}
+              onChange={(e) => handleInputChange(e)}
+              className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
+                isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
+              }`}
+            />
+          </div>
         </div>
 
         <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Items</h3>
@@ -347,6 +365,18 @@ const InvoiceForm = ({ onSubmit }) => {
                 ))}
               </datalist>
             </div> */}
+            <div>
+              <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>HSN code</label>
+              <input
+                type="text"
+                name="hsnCode"
+                value={item.hsnCode}
+                onChange={(e) => handleInputChange(e, index, 'items')}
+                className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
+                  isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
+                }`}
+              />
+            </div>
             <div>
               <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Quantity</label>
               <input
@@ -407,6 +437,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="number"
               name="cgst"
+            //   value={formData.taxDetails.cgst}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
                 isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
@@ -418,6 +449,7 @@ const InvoiceForm = ({ onSubmit }) => {
             <input
               type="number"
               name="sgst"
+            //   value={formData.taxDetails.sgst}
               onChange={(e) => handleInputChange(e)}
               className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
                 isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
