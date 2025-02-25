@@ -28,7 +28,9 @@ const Invoice = ({ data }) => {
 
     const copyLabels = [
       "Original Buyer's Copy",
+      "Original Buyer's Copy",
       "Original Seller's Copy",
+      "Original Transport's Copy",
     ];
 
     for (let pageIndex = 0; pageIndex < 2; pageIndex++) {
@@ -40,8 +42,7 @@ const Invoice = ({ data }) => {
 
         // Add Copy Labels
         doc.setFontSize(10);
-        // doc.setFont('helvetica');
-        doc.setFont('Cambria Math');
+        doc.setFont('helvetica');
         doc.text(copyLabels[currentIndex], xOffset + halfWidth - 5, 10, { align: 'right' });
 
         // Add Title
@@ -51,13 +52,13 @@ const Invoice = ({ data }) => {
         doc.text('TAX INVOICE', xOffset + halfWidth / 2, 12, { align: 'center' });
         doc.setFontSize(9);
         doc.text('PROPRIETOR: PUSHPA SHAW', xOffset + halfWidth / 2, 24, { align: 'center' });
-        doc.text('78/1 Christopher Road, Kolkata : 700046', xOffset + halfWidth / 2, 28, { align: 'center' });
+        doc.text('25/c RADHANATH CHOWDHURY ROAD KOLKATA -700015', xOffset + halfWidth / 2, 28, { align: 'center' });
 
         // Supplier Info
         doc.setFontSize(8);
         doc.text(`GST IN: 19AKWPS4940B1ZO`, xOffset + margin, 34);
         doc.text('EMAIL: alokshaw9318@gmail.com', xOffset + margin + 45, 34);
-        doc.text(`MOBILE: 8583043989`, xOffset + margin + 95, 34);
+        doc.text(`MOBILE: 9331271486`, xOffset + margin + 95, 34);
 
         // Invoice Details
         doc.line(xOffset + margin, 38, xOffset + halfWidth, 38);
