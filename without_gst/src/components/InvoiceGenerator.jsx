@@ -68,22 +68,20 @@ const Invoice = ({ data }) => {
       doc.text(`MOBILE NUMBER: ${data.receiverMobileNumber}`, xOffset + margin, 62);
 
       // Table
-      const tableColumn = ['S.NO', 'DESCRIPTION', 'HSN CODE', 'QNTY', 'RATE', 'AMOUNT (Rs)', 'PAISE'];
+      const tableColumn = ['S.NO', 'DESCRIPTION', 'QNTY', 'RATE', 'AMOUNT (Rs)'];
       let tableRows = data.items.map((item, index) => {
-        const amount = (item.quantity * item.rate).toFixed(2).split('.');
+        const amount = (item.quantity * item.rate).toFixed(2);
         return [
           index + 1,
           item.description,
-          item.hsnCode,
           item.quantity,
           item.rate,
-          amount[0],
-          amount[1]
+          amount
         ];
       });
 
       while (tableRows.length < 20) {
-        tableRows.push(['', '', '', '', '', '', '']);
+        tableRows.push(['', '', '', '', '']);
       }
 
       doc.autoTable({
@@ -99,18 +97,16 @@ const Invoice = ({ data }) => {
           minCellHeight: 4
         },
         headStyles: {
-          fillColor: [0, 176, 252],
+          fillColor: copyIndex === 0 ? [0, 176, 252] : [255, 193, 7],
           textColor: 255,
           halign: "center"
         },
         columnStyles: {
           0: { cellWidth: 10 },
-          1: { cellWidth: 45 },
-          2: { cellWidth: 20 },
+          1: { cellWidth: 75 },
+          2: { cellWidth: 15 },
           3: { cellWidth: 15 },
-          4: { cellWidth: 15 },
-          5: { cellWidth: 18 },
-          6: { cellWidth: 12 },
+          4: { cellWidth: 20 }
         },
         margin: { left: xOffset + margin },
         tableWidth: halfWidth - margin,
@@ -121,16 +117,10 @@ const Invoice = ({ data }) => {
 
       const finalY = doc.lastAutoTable.finalY;
       
-      // Bank Details
-      // doc.setFontSize(8);
-      // doc.text('Bank Details:', xOffset + margin, finalY + 4);
-      // doc.text('Bank Name: HDFC BANK', xOffset + margin, finalY + 8);
-      // doc.text('A/C No: 50200069668726', xOffset + margin, finalY + 12);
-      // doc.text('IFSC Code: HDFC0000092', xOffset + margin, finalY + 16);
-      // doc.text('Branch: CHRISTOPHER ROAD', xOffset + margin, finalY + 20);
-
-      doc.text(`TOTAL AMOUNT: Rs. ${totalAmount}`, xOffset + halfWidth - 5, finalY + 4, { align: 'right' });
-
+      doc.setFontSize(12);
+      doc.text(`TOTAL AMOUNT: Rs. ${totalAmount}`, xOffset + halfWidth - 10, finalY + 6, { align: 'right' });
+      
+      doc.setFontSize(8);
       doc.text('AUTHORISED SIGNATORY', xOffset + halfWidth - 5, pageHeight - margin, { align: 'right' });
     }
 
