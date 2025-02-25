@@ -52,7 +52,7 @@ const Invoice = ({ data }) => {
         doc.text('TAX INVOICE', xOffset + halfWidth / 2, 12, { align: 'center' });
         doc.setFontSize(9);
         doc.text('PROPRIETOR: PUSHPA SHAW', xOffset + halfWidth / 2, 24, { align: 'center' });
-        doc.text('25/c RADHANATH CHOWDHURY ROAD KOLKATA -700015', xOffset + halfWidth / 2, 28, { align: 'center' });
+        doc.text('78/1 Christopher Road, Kolkata : 700046', xOffset + halfWidth / 2, 28, { align: 'center' });
 
         // Supplier Info
         doc.setFontSize(8);
