@@ -1,4 +1,13 @@
+/**
+ * React component that renders an invoice form with various input fields for invoice details, receiver details, items, tax details, and bank details.
+ * The component uses state to manage the form data and provides functionality to add new items, toggle a dark theme, and submit the form.
+ * The component also displays a message about the dark mode toggle feature for a limited time.
+ *
+ * @param {function} onSubmit - A callback function that is called when the form is submitted, passing the form data as an argument.
+ * @returns {JSX.Element} - The rendered invoice form component.
+ */
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const InvoiceForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -12,17 +21,12 @@ const InvoiceForm = ({ onSubmit }) => {
     receiverGST: '',
     receiverState: '',
     receiverCode: '',
-    consigneeName: '',
-    consigneeAddress: '',
-    consigneeGST: '',
-    consigneeState: '',
-    consigneeCode: '',
     items: [{ description: '', hsnCode: '853810', quantity: '', rate: '' }],
     bankDetails: {
-      bankName: 'STATE BANK OF INDIA',
+      bankName: 'CANARA BANK',
       branch: 'DHARMATALA',
-      accountNo: '34548292907',
-      ifscCode: 'SBIN00003737',
+      accountNo: '127000140902',
+      ifscCode: 'CNRB0019592',
     },
     taxDetails: {
       cgst: '0',
@@ -32,11 +36,75 @@ const InvoiceForm = ({ onSubmit }) => {
       roundedOff: '0',
     },
     numberOfBags: '',
-    pdfLink: 'https://drive.google.com/file/d/1UqVo8Il0_z6u43Dq-a-VDRgJmwfIo6cu/view?usp=sharing'
+    pdfLink: 'https://drive.google.com/file/d/1eUYyZqZBuYCdWR5T1sz25yTQgkXq_Pcl/view?usp=sharing'
   });
 
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [showMessage, setShowMessage] = useState(true);
+
+  const suggestions = [
+    "HONKS LUDO PUFFS",
+    "HONKS LOTTERY PUFFS",
+    "HONKS PUFFS ORANGE",
+    "HONKS HAPPY BIRTHDAY PUFFS",
+    "HONKS PENCIL BOX PUFFS",
+    "HONKS CASINO BALLS",
+    "HONKS PUFFS RED",
+    "CHIWDA MIX MASALA",
+    "ALU BHUJJIA",
+    "KHATTA MITHA CHANACUR",
+    "MOONG DAAL",
+    "ACHARI MASALA PEANUTS",
+    "ACHARI CHANACHUR",
+    "JHAL MURI",
+    "CAMPA@10 GREEN",
+    "CAMPA@10 ORANGE",
+    "CAMPA@10 BLACK",
+    "CAMPA@20 GREEN",
+    "CAMPA@20 ORANGE",
+    "CAMPA@20 BLACK",
+    "BIOVA WATER 200ML",
+    "BIOVA WATER 500ML",
+    "BIOVA WATER 1L",
+    "BIOVA WATER 2L",
+    "BIOVA WATER 5L",
+    // "2 MODULAR CONCEALED MS BOXES",
+    // "3 MODULAR CONCEALED MS BOXES",
+    // "4 MODULAR CONCEALED MS BOXES",
+    // "6 MODULAR CONCEALED MS BOXES",
+    // "8 MODULAR CONCEALED MS BOXES",
+    // "12 MODULAR CONCEALED MS BOXES",
+    // "16 MODULAR CONCEALED MS BOXES",
+    // "18 MODULAR CONCEALED MS BOXES",
+    // "3 X 3 X 2 CONCEALED MS BOXES",
+    // "4 X 4 X 2 CONCEALED MS BOXES",
+    // "6 X 4 X 2 CONCEALED MS BOXES",
+    // "7 X 4 X 2 CONCEALED MS BOXES",
+    // "8 X 6 X 2 CONCEALED MS BOXES",
+    // "10 X 12 X 2 CONCEALED MS BOXES",
+    // "4 X 8 X 2 CONCEALED MS BOXES",
+    // "4 X 10 X 2 CONCEALED MS BOXES",
+    // "8 X 6 X 3 CONCEALED MS BOXES",
+    // "8 X 10 X 3 CONCEALED MS BOXES",
+    // "8 X 10 X 2 CONCEALED MS BOXES",
+    // "8 X 12 X 3 CONCEALED MS BOXES",
+    // "8 X 12 X 2 CONCEALED MS BOXES",
+    // "4 X 12 X 2 CONCEALED MS BOXES",
+    // "6 X 4 X 2½ CONCEALED MS BOXES",
+    // "4 X 4 X 2½ CONCEALED MS BOXES",
+    // "8 X 6 X 2½ CONCEALED MS BOXES",
+    // "12 X 14 X 2 CONCEALED MS BOXES",
+    // "10 X 14 X 2 CONCEALED MS BOXES",
+    // "10 X 12 X 2 CONCEALED MS BOXES",
+    // "FAN BOX WITH ROD ",
+    // "3 LED BOWL",
+    // "6 LED BOWL",
+    // "4.5 LED BOWL ",
+    // "12 LED BOWL ",
+    // "8 SQUARE CONCEALED MS BOXES ",
+    // "HEXAGON FAN BOX",
+    // "HEXAGON FAN BOX WITH ROD",
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -69,8 +137,20 @@ const InvoiceForm = ({ onSubmit }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:5000/api/invoice', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      console.log('Invoice created successfully:', response.data);
+      onSubmit(formData);
+    } catch (error) {
+      console.error('Error uploading the invoice details:', error);
+    }
     onSubmit(formData);
   };
 
@@ -228,22 +308,45 @@ const InvoiceForm = ({ onSubmit }) => {
           </div>
         </div>
 
-
         <h3 className={`text-2xl font-bold mt-8 mb-4 ${isDarkTheme ? 'text-white' : 'text-gray-800'}`}>Items</h3>
         {formData.items.map((item, index) => (
           <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-4">
-            <div>
+              <div>
+                <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
+                <select
+                  name="description"
+                  value={item.description}
+                  onChange={(e) => handleInputChange(e, index, 'items')}
+                  className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
+                    isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
+                  }`}
+                >
+                  <option value="">Select an item</option>
+                  {suggestions.map((suggestion, i) => (
+                    <option key={i} value={suggestion}>
+                      {suggestion}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* <div>
               <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Description</label>
               <input
                 type="text"
                 name="description"
                 value={item.description}
                 onChange={(e) => handleInputChange(e, index, 'items')}
+                list={`suggestions-${index}`}
                 className={`w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring ${
                   isDarkTheme ? 'bg-gray-700 text-white border-gray-600 focus:ring-blue-500' : 'bg-white text-gray-800 border-gray-300 focus:ring-blue-300'
                 }`}
               />
-            </div>
+              <datalist id={`suggestions-${index}`}>
+                {suggestions.map((suggestion, i) => (
+                  <option key={i} value={suggestion} />
+                ))}
+              </datalist>
+            </div> */}
             <div>
               <label className={`block ${isDarkTheme ? 'text-gray-300' : 'text-gray-700'}`}>Quantity</label>
               <input
@@ -280,7 +383,7 @@ const InvoiceForm = ({ onSubmit }) => {
               >
                 Add Item
               </button>
-              </div>
+            </div>
           </div>
         ))}
 
