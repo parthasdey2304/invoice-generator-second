@@ -1,5 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import qr from '../assets/img/QR.jpg';
 
 function formatDateToDDMMYYYY(date) {
   const [year, month, day] = date.split('-');
@@ -116,6 +117,9 @@ const Invoice = ({ data }) => {
       let totalAmount = data.items.reduce((sum, item) => sum + (item.quantity * item.rate), 0).toFixed(2);
 
       const finalY = doc.lastAutoTable.finalY;
+      
+      // Add QR code
+      doc.addImage(qr, 'JPEG', xOffset + margin, finalY + 5, 20, 20);
       
       doc.setFontSize(12);
       doc.text(`TOTAL AMOUNT: Rs. ${totalAmount}`, xOffset + halfWidth - 10, finalY + 6, { align: 'right' });
