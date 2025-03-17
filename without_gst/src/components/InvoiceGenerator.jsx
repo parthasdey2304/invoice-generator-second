@@ -46,7 +46,7 @@ const Invoice = ({ data }) => {
       doc.setFontSize(10);
       doc.text('INVOICE', xOffset + halfWidth / 2, 17, { align: 'center' });
       doc.setFontSize(11);
-      doc.text('78/1 Christopher Road, Kolkata : 700046', xOffset + halfWidth / 2, 29, { align: 'center' });
+      doc.text('19, Christopher Road, Kolkata : 700046', xOffset + halfWidth / 2, 29, { align: 'center' });
 
       // Supplier Info
       doc.setFontSize(8);
