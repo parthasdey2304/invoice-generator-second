@@ -42,7 +42,7 @@ const Invoice = ({ data }) => {
 
       // Add Title
       doc.setFontSize(20);
-      doc.text('ANMOL ENTERPRISE', xOffset + halfWidth / 2, 24, { align: 'center' });
+      doc.text('ANIKET ENTERPRISE', xOffset + halfWidth / 2, 24, { align: 'center' });
       doc.setFontSize(10);
       doc.text('INVOICE', xOffset + halfWidth / 2, 17, { align: 'center' });
       doc.setFontSize(11);

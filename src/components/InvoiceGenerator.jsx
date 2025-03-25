@@ -104,7 +104,7 @@ const Invoice = ({ data }) => {
 
       // Add title and basic information
       doc.setFontSize(19);
-      doc.text('ANMOL ENTERPRISE', pageWidth / 2, 21, { align: 'center' });
+      doc.text('ANIKET ENTERPRISE', pageWidth / 2, 21, { align: 'center' });
       doc.setFontSize(13);
       doc.text('TAX INVOICE', pageWidth / 2, 12, { align: 'center' });
       doc.setFontSize(11);
